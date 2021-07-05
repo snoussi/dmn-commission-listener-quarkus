@@ -1,0 +1,13 @@
+{
+    "duree initiale financement": 15,
+    "dossier annule resilie ou impaye": false,
+    "taux interet dossier": 25,
+    "taux interet marche": 18,
+    "type apporteur": "VD",
+    "type vehicule": "VO",
+    "prestations": [
+        "GVA"
+    ],
+    "type financement": "CREDIT_CLASSIQUE",
+    "production": 1000
+}
