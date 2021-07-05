@@ -2,7 +2,7 @@
 
 ## Description
 
-A simple DMN service to evaluate a traffic violation, with the addition of some DMN listeners.
+A simple DMN service, with the addition of some DMN listeners.
 
 Demonstrates Kogito capability to automatically inject custom listeners in the DMN runtime without the need of writing a single line of Java code for the wiring itself.
 
