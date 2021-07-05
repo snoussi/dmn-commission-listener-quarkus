@@ -80,56 +80,67 @@ All the listeners instantiated with both methods will be injected during the app
 
 Once the service is up and running, you can use the following example to interact with the service.
 
-### POST /Traffic Violation
+### POST /convention_1_optim
 
-Returns penalty information from the given inputs -- driver and violation:
+Returns commissiom calculation from the given inputs :
 
 Given inputs:
 
 ```json
 {
-    "Driver":{"Points":2},
-    "Violation":{
-        "Type":"speed",
-        "Actual Speed":120,
-        "Speed Limit":100
-    }
+    "duree initiale financement": 15,
+    "dossier annule resilie ou impaye": false,
+    "taux interet dossier": 25,
+    "taux interet marche": 18,
+    "type apporteur": "VD",
+    "type vehicule": "VO",
+    "prestations": [
+        "GVA"
+    ],
+    "type financement": "CREDIT_CLASSIQUE",
+    "production": 1000
 }
 ```
 
 Curl command (using the JSON object above):
 
 ```sh
-curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"Driver":{"Points":2},"Violation":{"Type":"speed","Actual Speed":120,"Speed Limit":100}}' http://localhost:8080/Traffic%20Violation
+curl -X 'POST' \
+  'http://localhost:8080/convention_1_optim' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "duree initiale financement": 15,
+    "dossier annule resilie ou impaye": false,
+    "taux interet dossier": 25,
+    "taux interet marche": 18,
+    "type apporteur": "VD",
+    "type vehicule": "VO",
+    "prestations": [
+        "GVA"
+    ],
+    "type financement": "CREDIT_CLASSIQUE",
+    "production": 1000
+}'
 ```
-or on Windows:
-
-```sh
-curl -X POST -H "Accept: application/json" -H "Content-Type: application/json" -d "{\"Driver\":{\"Points\":2},\"Violation\":{\"Type\":\"speed\",\"Actual Speed\":120,\"Speed Limit\":100}}" http://localhost:8080/Traffic%20Violation
-```
-
-As response, penalty information is returned.
 
 Example response:
 
 ```json
 {
-  "Violation":{
-    "Type":"speed",
-    "Speed Limit":100,
-    "Actual Speed":120
-  },
-  "Driver":{
-    "Points":2
-  },
-  "Fine":{
-    "Points":3,
-    "Amount":500
-  },
-  "Should the driver be suspended?":"No"
+  "prestations": [
+    "GVA"
+  ],
+  "dossier annule resilie ou impaye": false,
+  "production": 1000,
+  "type financement": "CREDIT_CLASSIQUE",
+  "exclusion": false,
+  "commission": 26.25,
+  "type vehicule": "VO",
+  "type apporteur": "VD",
+  "taux interet marche": 18,
+  "duree initiale financement": 15,
+  "taux interet dossier": 25,
+  "taux commission": 5.25
 }
 ```
-
-## Deploying with Kogito Operator
-
-In the [`operator`](operator) directory you'll find the custom resources needed to deploy this example on OpenShift with the [Kogito Operator](https://docs.jboss.org/kogito/release/latest/html_single/#chap_kogito-deploying-on-openshift).
